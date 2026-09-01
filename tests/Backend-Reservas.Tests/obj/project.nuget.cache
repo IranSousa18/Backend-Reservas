@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "S9zGjOGbL6c=",
+  "dgSpecHash": "USLBsL+4dgc=",
   "success": true,
   "projectFilePath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Backend-Reservas\\tests\\Backend-Reservas.Tests\\Backend-Reservas.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\coverlet.collector\\6.0.4\\coverlet.collector.6.0.4.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.codecoverage\\17.14.1\\microsoft.codecoverage.17.14.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.net.test.sdk\\17.14.1\\microsoft.net.test.sdk.17.14.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.testplatform.objectmodel\\17.14.1\\microsoft.testplatform.objectmodel.17.14.1.nupkg.sha512",

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "GLWUasAOuyg=",
+  "dgSpecHash": "mtbRtFiZrus=",
   "success": true,
   "projectFilePath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\Backend-Reservas\\src\\Backend-Reservas.API\\Backend-Reservas.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Usuario\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.10\\microsoft.aspnetcore.openapi.10.0.10.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
   ],
