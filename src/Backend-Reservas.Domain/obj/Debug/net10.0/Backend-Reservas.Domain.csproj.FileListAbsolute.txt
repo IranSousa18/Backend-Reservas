@@ -1,0 +1,12 @@
+C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.Domain\bin\Debug\net10.0\Backend-Reservas.Domain.deps.json
+C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.Domain\bin\Debug\net10.0\Backend-Reservas.Domain.dll
+C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.Domain\bin\Debug\net10.0\Backend-Reservas.Domain.pdb
+C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.Domain\obj\Debug\net10.0\Backend-Reservas.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.Domain\obj\Debug\net10.0\Backend-Reservas.Domain.AssemblyInfoInputs.cache
+C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.Domain\obj\Debug\net10.0\Backend-Reservas.Domain.AssemblyInfo.cs
+C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.Domain\obj\Debug\net10.0\Backend-Reservas.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.Domain\obj\Debug\net10.0\Backend-Reservas.Domain.sourcelink.json
+C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.Domain\obj\Debug\net10.0\Backend-Reservas.Domain.dll
+C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.Domain\obj\Debug\net10.0\refint\Backend-Reservas.Domain.dll
+C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.Domain\obj\Debug\net10.0\Backend-Reservas.Domain.pdb
+C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.Domain\obj\Debug\net10.0\ref\Backend-Reservas.Domain.dll
