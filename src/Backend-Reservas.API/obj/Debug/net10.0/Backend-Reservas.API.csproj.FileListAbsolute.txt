@@ -38,3 +38,4 @@ C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.API\o
 C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.API\obj\Debug\net10.0\Backend-Reservas.API.pdb
 C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.API\obj\Debug\net10.0\Backend-Reservas.API.genruntimeconfig.cache
 C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.API\obj\Debug\net10.0\ref\Backend-Reservas.API.dll
+C:\Users\Usuario\OneDrive\Documentos\Backend-Reservas\src\Backend-Reservas.API\bin\Debug\net10.0\FluentValidation.dll
