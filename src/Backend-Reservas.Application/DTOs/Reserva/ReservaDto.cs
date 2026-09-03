@@ -8,9 +8,9 @@ public class ReservaDto
 
     public int SalaId { get; set; }
 
-    public DateTime Inicio { get; set; }
+    public DateTimeOffset Inicio { get; set; }
 
-    public DateTime Fim { get; set; }
+    public DateTimeOffset Fim { get; set; }
 
     public string Responsavel { get; set; } = string.Empty;
 
