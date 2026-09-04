@@ -136,7 +136,9 @@ public class ReservaService : IReservaService
         if (reserva is null)
             return false;
 
-        await _reservaRepository.ExcluirAsync(reserva);
+        reserva.Status = StatusReserva.Cancelada;
+
+        await _reservaRepository.AtualizarAsync(reserva);
 
         return true;
     }
