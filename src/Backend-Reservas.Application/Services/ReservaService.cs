@@ -53,6 +53,9 @@ public class ReservaService : IReservaService
 
     public async Task<ReservaDto> CriarAsync(CriarReservaDto dto)
     {
+        if (dto.Inicio >= dto.Fim)
+            throw new PeriodoReservaInvalidoException();
+
         var sala = await _salaRepository.ObterPorIdAsync(dto.SalaId);
 
         if (sala is null)
@@ -85,6 +88,9 @@ public class ReservaService : IReservaService
 
         if (reserva is null)
             return false;
+
+        if (dto.Inicio >= dto.Fim)
+            throw new PeriodoReservaInvalidoException();
 
         var sala = await _salaRepository.ObterPorIdAsync(dto.SalaId);
 
