@@ -1,4 +1,5 @@
 using Backend_Reservas.Application.DTOs.Reserva;
+using Backend_Reservas.Application.Exceptions;
 using Backend_Reservas.Application.Interfaces;
 using Backend_Reservas.Domain.Entities;
 
@@ -52,6 +53,11 @@ public class ReservaService : IReservaService
 
     public async Task<ReservaDto> CriarAsync(CriarReservaDto dto)
     {
+        var sala = await _salaRepository.ObterPorIdAsync(dto.SalaId);
+
+        if (sala is null)
+            throw new SalaNaoEncontradaException(dto.SalaId);
+
         var reserva = new Reserva
         {
             SalaId = dto.SalaId,
@@ -79,6 +85,11 @@ public class ReservaService : IReservaService
 
         if (reserva is null)
             return false;
+
+        var sala = await _salaRepository.ObterPorIdAsync(dto.SalaId);
+
+        if (sala is null)
+            throw new SalaNaoEncontradaException(dto.SalaId);
 
         reserva.SalaId = dto.SalaId;
         reserva.Inicio = dto.Inicio;
