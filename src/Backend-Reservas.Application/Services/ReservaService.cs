@@ -7,10 +7,14 @@ namespace Backend_Reservas.Application.Services;
 public class ReservaService : IReservaService
 {
     private readonly IReservaRepository _reservaRepository;
+    private readonly ISalaRepository _salaRepository;
 
-    public ReservaService(IReservaRepository reservaRepository)
+    public ReservaService(
+        IReservaRepository reservaRepository,
+        ISalaRepository salaRepository)
     {
         _reservaRepository = reservaRepository;
+        _salaRepository = salaRepository;
     }
 
     public async Task<IEnumerable<ReservaDto>> ObterTodasAsync(int? salaId = null)
