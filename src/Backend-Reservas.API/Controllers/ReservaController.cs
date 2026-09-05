@@ -1,6 +1,7 @@
 using Backend_Reservas.Application.DTOs.Reserva;
 using Backend_Reservas.Application.Exceptions;
 using Backend_Reservas.Application.Interfaces;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend_Reservas.API.Controllers;
@@ -10,10 +11,17 @@ namespace Backend_Reservas.API.Controllers;
 public class ReservaController : ControllerBase
 {
     private readonly IReservaService _reservaService;
+    private readonly IValidator<CriarReservaDto> _criarReservaValidator;
+    private readonly IValidator<AtualizarReservaDto> _atualizarReservaValidator;
 
-    public ReservaController(IReservaService reservaService)
+    public ReservaController(
+        IReservaService reservaService,
+        IValidator<CriarReservaDto> criarReservaValidator,
+        IValidator<AtualizarReservaDto> atualizarReservaValidator)
     {
         _reservaService = reservaService;
+        _criarReservaValidator = criarReservaValidator;
+        _atualizarReservaValidator = atualizarReservaValidator;
     }
 
     [HttpGet]
@@ -49,6 +57,17 @@ public class ReservaController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Criar([FromBody] CriarReservaDto dto)
     {
+        var resultado = await _criarReservaValidator.ValidateAsync(dto);
+
+        if (!resultado.IsValid)
+        {
+            return BadRequest(new
+            {
+                mensagem = "Os dados da reserva são inválidos.",
+                erros = resultado.Errors.Select(erro => erro.ErrorMessage)
+            });
+        }
+
         try
         {
             var reserva = await _reservaService.CriarAsync(dto);
@@ -86,6 +105,17 @@ public class ReservaController : ControllerBase
         int id,
         [FromBody] AtualizarReservaDto dto)
     {
+        var resultado = await _atualizarReservaValidator.ValidateAsync(dto);
+
+        if (!resultado.IsValid)
+        {
+            return BadRequest(new
+            {
+                mensagem = "Os dados da reserva são inválidos.",
+                erros = resultado.Errors.Select(erro => erro.ErrorMessage)
+            });
+        }
+
         try
         {
             var atualizada = await _reservaService.AtualizarAsync(id, dto);
