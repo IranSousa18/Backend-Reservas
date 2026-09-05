@@ -130,16 +130,16 @@ public class ReservaService : IReservaService
     }
 
     public async Task<bool> ExcluirAsync(int id)
-    {
-        var reserva = await _reservaRepository.ObterPorIdAsync(id);
+{
+    var reserva = await _reservaRepository.ObterPorIdAsync(id);
 
-        if (reserva is null)
-            return false;
+    if (reserva is null)
+        return false;
 
-        reserva.Status = StatusReserva.Cancelada;
+    reserva.Deleted = true;
 
-        await _reservaRepository.AtualizarAsync(reserva);
+    await _reservaRepository.AtualizarAsync(reserva);
 
-        return true;
-    }
+    return true;
+}
 }
