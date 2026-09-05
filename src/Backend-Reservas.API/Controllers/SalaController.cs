@@ -1,5 +1,6 @@
 using Backend_Reservas.Application.DTOs.Sala;
 using Backend_Reservas.Application.Interfaces;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend_Reservas.API.Controllers;
@@ -9,10 +10,17 @@ namespace Backend_Reservas.API.Controllers;
 public class SalaController : ControllerBase
 {
     private readonly ISalaService _salaService;
+    private readonly IValidator<CriarSalaDto> _criarSalaValidator;
+    private readonly IValidator<AtualizarSalaDto> _atualizarSalaValidator;
 
-    public SalaController(ISalaService salaService)
+    public SalaController(
+        ISalaService salaService,
+        IValidator<CriarSalaDto> criarSalaValidator,
+        IValidator<AtualizarSalaDto> atualizarSalaValidator)
     {
         _salaService = salaService;
+        _criarSalaValidator = criarSalaValidator;
+        _atualizarSalaValidator = atualizarSalaValidator;
     }
 
     [HttpGet]
@@ -46,6 +54,17 @@ public class SalaController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Criar([FromBody] CriarSalaDto dto)
     {
+        var resultado = await _criarSalaValidator.ValidateAsync(dto);
+
+        if (!resultado.IsValid)
+        {
+            return BadRequest(new
+            {
+                mensagem = "Os dados da sala são inválidos.",
+                erros = resultado.Errors.Select(erro => erro.ErrorMessage)
+            });
+        }
+
         var sala = await _salaService.CriarAsync(dto);
 
         return CreatedAtAction(
@@ -59,6 +78,17 @@ public class SalaController : ControllerBase
         int id,
         [FromBody] AtualizarSalaDto dto)
     {
+        var resultado = await _atualizarSalaValidator.ValidateAsync(dto);
+
+        if (!resultado.IsValid)
+        {
+            return BadRequest(new
+            {
+                mensagem = "Os dados da sala são inválidos.",
+                erros = resultado.Errors.Select(erro => erro.ErrorMessage)
+            });
+        }
+
         var atualizada = await _salaService.AtualizarAsync(id, dto);
 
         if (!atualizada)
