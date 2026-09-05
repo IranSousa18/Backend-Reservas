@@ -23,22 +23,24 @@ public class ReservaService : IReservaService
     {
         var reservas = await _reservaRepository.ObterTodasAsync(salaId);
 
-        return reservas.Select(reserva => new ReservaDto
-        {
-            Id = reserva.Id,
-            SalaId = reserva.SalaId,
-            Inicio = reserva.Inicio,
-            Fim = reserva.Fim,
-            Responsavel = reserva.Responsavel,
-            Status = reserva.Status
-        });
+        return reservas
+            .Where(reserva => !reserva.Deleted)
+            .Select(reserva => new ReservaDto
+            {
+                Id = reserva.Id,
+                SalaId = reserva.SalaId,
+                Inicio = reserva.Inicio,
+                Fim = reserva.Fim,
+                Responsavel = reserva.Responsavel,
+                Status = reserva.Status
+            });
     }
 
     public async Task<ReservaDto?> ObterPorIdAsync(int id)
     {
         var reserva = await _reservaRepository.ObterPorIdAsync(id);
 
-        if (reserva is null)
+        if (reserva is null || reserva.Deleted)
             return null;
 
         return new ReservaDto
@@ -66,6 +68,7 @@ public class ReservaService : IReservaService
 
         var existeConflito = reservas.Any(reserva =>
             reserva.Status != StatusReserva.Cancelada &&
+            !reserva.Deleted &&
             reserva.Inicio < dto.Fim &&
             reserva.Fim > dto.Inicio);
 
@@ -97,7 +100,7 @@ public class ReservaService : IReservaService
     {
         var reserva = await _reservaRepository.ObterPorIdAsync(id);
 
-        if (reserva is null)
+        if (reserva is null || reserva.Deleted)
             return false;
 
         if (dto.Inicio >= dto.Fim)
@@ -113,6 +116,7 @@ public class ReservaService : IReservaService
         var existeConflito = reservas.Any(reservaExistente =>
             reservaExistente.Id != id &&
             reservaExistente.Status != StatusReserva.Cancelada &&
+            !reservaExistente.Deleted &&
             reservaExistente.Inicio < dto.Fim &&
             reservaExistente.Fim > dto.Inicio);
 
@@ -130,16 +134,16 @@ public class ReservaService : IReservaService
     }
 
     public async Task<bool> ExcluirAsync(int id)
-{
-    var reserva = await _reservaRepository.ObterPorIdAsync(id);
+    {
+        var reserva = await _reservaRepository.ObterPorIdAsync(id);
 
-    if (reserva is null)
-        return false;
+        if (reserva is null)
+            return false;
 
-    reserva.Deleted = true;
+        reserva.Deleted = true;
 
-    await _reservaRepository.AtualizarAsync(reserva);
+        await _reservaRepository.AtualizarAsync(reserva);
 
-    return true;
-}
+        return true;
+    }
 }
