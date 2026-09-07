@@ -1,3 +1,5 @@
+using Backend_Reservas.Domain.Enums;
+
 namespace Backend_Reservas.Application.DTOs.Reserva;
 
 public class AtualizarReservaDto
@@ -9,4 +11,6 @@ public class AtualizarReservaDto
     public DateTimeOffset Fim { get; set; }
 
     public string Responsavel { get; set; } = string.Empty;
+
+    public StatusReserva? Status { get; set; }
 }

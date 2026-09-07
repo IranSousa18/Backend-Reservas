@@ -155,7 +155,28 @@ public class ReservaServiceTests
     }
 
     [Fact]
-    public async Task CriarAsync_DeveIgnorarReservaCanceladaNoConflito()
+    public async Task AtualizarAsync_DevePermitirCancelarReserva()
+    {
+        var reserva = await _service.CriarAsync(
+            CriarDto(10, 12));
+
+        var dto = CriarAtualizarDto(10, 12);
+        dto.Status = StatusReserva.Cancelada;
+
+        var resultado = await _service.AtualizarAsync(
+            reserva.Id,
+            dto);
+
+        Assert.True(resultado);
+
+        var atualizada = await _service.ObterPorIdAsync(reserva.Id);
+
+        Assert.NotNull(atualizada);
+        Assert.Equal(StatusReserva.Cancelada, atualizada.Status);
+    }
+
+    [Fact]
+    public async Task CriarAsync_DeveIgnorarReservaDeletadaNoConflito()
     {
         var reserva = await _service.CriarAsync(
             CriarDto(10, 12));
@@ -169,17 +190,10 @@ public class ReservaServiceTests
         Assert.NotNull(resultado);
     }
 
-    private static CriarReservaDto CriarDto(
-        int inicio,
-        int fim)
+    private static CriarReservaDto CriarDto(int inicio, int fim)
     {
         var data = new DateTimeOffset(
-            2026,
-            9,
-            6,
-            0,
-            0,
-            0,
+            2026, 9, 6, 0, 0, 0,
             TimeSpan.FromHours(-3));
 
         return new CriarReservaDto
@@ -191,17 +205,10 @@ public class ReservaServiceTests
         };
     }
 
-    private static AtualizarReservaDto CriarAtualizarDto(
-        int inicio,
-        int fim)
+    private static AtualizarReservaDto CriarAtualizarDto(int inicio, int fim)
     {
         var data = new DateTimeOffset(
-            2026,
-            9,
-            6,
-            0,
-            0,
-            0,
+            2026, 9, 6, 0, 0, 0,
             TimeSpan.FromHours(-3));
 
         return new AtualizarReservaDto

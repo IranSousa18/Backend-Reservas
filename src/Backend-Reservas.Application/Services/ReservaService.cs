@@ -113,12 +113,15 @@ public class ReservaService : IReservaService
 
         var reservas = await _reservaRepository.ObterTodasAsync(dto.SalaId);
 
-        var existeConflito = reservas.Any(reservaExistente =>
-            reservaExistente.Id != id &&
-            reservaExistente.Status != StatusReserva.Cancelada &&
-            !reservaExistente.Deleted &&
-            reservaExistente.Inicio < dto.Fim &&
-            reservaExistente.Fim > dto.Inicio);
+        var status = dto.Status ?? reserva.Status;
+
+        var existeConflito = status != StatusReserva.Cancelada &&
+            reservas.Any(reservaExistente =>
+                reservaExistente.Id != id &&
+                reservaExistente.Status != StatusReserva.Cancelada &&
+                !reservaExistente.Deleted &&
+                reservaExistente.Inicio < dto.Fim &&
+                reservaExistente.Fim > dto.Inicio);
 
         if (existeConflito)
             throw new ReservaConflitanteException();
@@ -127,6 +130,7 @@ public class ReservaService : IReservaService
         reserva.Inicio = dto.Inicio;
         reserva.Fim = dto.Fim;
         reserva.Responsavel = dto.Responsavel;
+        reserva.Status = status;
 
         await _reservaRepository.AtualizarAsync(reserva);
 
@@ -146,4 +150,4 @@ public class ReservaService : IReservaService
 
         return true;
     }
-} 
+}

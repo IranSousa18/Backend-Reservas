@@ -24,5 +24,10 @@ public class AtualizarReservaValidator : AbstractValidator<AtualizarReservaDto>
             .WithMessage("O responsável pela reserva é obrigatório.")
             .MaximumLength(150)
             .WithMessage("O responsável deve ter no máximo 150 caracteres.");
+
+        RuleFor(reserva => reserva.Status)
+            .IsInEnum()
+            .When(reserva => reserva.Status.HasValue)
+            .WithMessage("O status da reserva informado é inválido.");
     }
 }
